@@ -4,6 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const CasePage = () => {
   const searchParams = useSearchParams();
@@ -11,27 +12,33 @@ const CasePage = () => {
   const [caseData, setCaseData] = useState<Case | null>(null);
   const [status, setStatus] = useState("");
 
+  const fetchCaseData = async () => {
+    try {
+      const res = await axios.get(`/api/cases/getCase?caseId=${caseId}`);
+      setCaseData(res.data.caseData);
+      console.log(res.data.caseData);
+      setStatus(res.data.caseData.status);
+    } catch (error) {
+      console.error("Error fetching case data:", error);
+    }
+  };
   useEffect(() => {
-    const fetchCaseData = async () => {
-      try {
-        const res = await axios.get(`/api/cases/getCase?caseId=${caseId}`);
-        setCaseData(res.data.caseData);
-        console.log(res.data.caseData);
-        setStatus(res.data.caseData.status);
-      } catch (error) {
-        console.error("Error fetching case data:", error);
-      }
-    };
     fetchCaseData();
   }, [caseId]);
 
   const handleStatusChange = async (newStatus: string) => {
     try {
-      await axios.put(`/api/cases/updateCase`, {
-        caseId,
-        status: newStatus,
+      const res = axios.put(
+        `/api/cases/updateCase?caseId=${caseId}&status=${newStatus}`
+      );
+      toast.promise(res, {
+        loading: "Updating status...",
+        success: () => {
+          fetchCaseData();
+          return "Status updated successfully";
+        },
+        error: "Error updating status",
       });
-      setStatus(newStatus);
     } catch (error) {
       console.error("Error updating status:", error);
     }

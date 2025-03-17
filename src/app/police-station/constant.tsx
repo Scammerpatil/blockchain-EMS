@@ -24,8 +24,8 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <IconClipboardCheck width="24" height="24" />,
   },
   {
-    title: "Security Alerts",
-    path: "/police-station/security-alerts",
+    title: "Verify Evidences",
+    path: "/police-station/verify-evidences",
     icon: <IconAlertCircle width="24" height="24" />,
   },
   {

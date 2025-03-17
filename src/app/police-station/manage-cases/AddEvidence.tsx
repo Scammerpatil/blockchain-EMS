@@ -11,14 +11,12 @@ const AddEvidencePage = ({ id, caseId }: { id: string; caseId: string }) => {
     type: "",
     file: null,
   });
-  console.log(evidenceData);
   useEffect(() => {
     initBlockchain();
+    setEvidenceData((prev) => ({ ...prev, id: id, caseId: caseId }));
   }, []);
 
   const handleSubmit = async () => {
-    setEvidenceData((prev) => ({ ...prev, id: id, caseId: caseId }));
-    console.log(evidenceData);
     if (
       !evidenceData.description ||
       !evidenceData.type ||
