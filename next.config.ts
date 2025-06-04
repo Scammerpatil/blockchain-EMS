@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "res.cloudinary.com",
+        hostname: "cdn-icons-png.flaticon.com",
       },
       {
         hostname: "cdn-icons-png.flaticon.com",

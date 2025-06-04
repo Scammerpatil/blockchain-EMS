@@ -48,7 +48,7 @@ const ManageOrganisationPage = () => {
       </h1>
       <div className="w-full px-6 py-4">
         <div className="overflow-x-auto">
-          <table className="table table-zebra">
+          <table className="table table-zebra bg-base-300">
             <thead>
               <tr>
                 <th>#</th>

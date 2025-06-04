@@ -23,12 +23,7 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   },
   {
     title: "Verify Evidence Integrity",
-    path: "/admin/verify-evidence",
+    path: "/admin/verify-evidences",
     icon: <IconShieldCheck width="24" height="24" />,
-  },
-  {
-    title: "Profile",
-    path: "/admin/profile",
-    icon: <IconUser width="24" height="24" />,
   },
 ];

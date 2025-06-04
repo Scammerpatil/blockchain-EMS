@@ -52,7 +52,7 @@ const Contact = () => {
               <IconPhone size={18} /> +91 9876543210
             </p>
             <p className="flex items-center gap-2 mt-2 text-center">
-              <IconMail size={18} /> support@flatfinder.com
+              <IconMail size={18} /> support@evidencemanagementsystem.com
             </p>
             <p className="flex items-center gap-2 mt-2 text-center">
               <IconMapPin size={18} /> 123, Green Street, New Delhi, India

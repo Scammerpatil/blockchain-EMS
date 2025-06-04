@@ -21,13 +21,10 @@ const Header = () => {
                 <span className="text-secondary font-extrabold text-xl">
                   Management
                 </span>
-                <span className="text-accent font-semibold text-xl">
-                  System
-                </span>
               </div>
               <hr className="w-full border border-base-content" />
               <span className="text-sm text-base-content/70 italic">
-                Blockchain-Powered Evidence Management System
+                Blockchain-Powered Evidence Management
               </span>
             </div>
           </Link>
@@ -41,7 +38,7 @@ const Header = () => {
               <Link href="/contact">Contact</Link>
             </li>
             <li>
-              <Link href="/services">Services</Link>
+              <Link href="/features">Features</Link>
             </li>
           </ul>
         </div>

@@ -9,9 +9,38 @@ const SignUp = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    otp: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [otp, setOtp] = useState("");
   const router = useRouter();
+  const handleEmailVerification = async () => {
+    if (!formData.email) {
+      toast.error("Please enter your email");
+      return;
+    }
+    if (formData.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
+      handleSubmit();
+      return;
+    }
+    const response = axios.post("/api/auth/send-otp", {
+      email: formData.email,
+    });
+    toast.promise(response, {
+      loading: "Sending OTP...",
+      success: (data: AxiosResponse) => {
+        setOtp(data.data.token);
+        (
+          document.getElementById("otpContainer") as HTMLDialogElement
+        ).showModal();
+        return "OTP sent to your email";
+      },
+      error: (err: any) => {
+        console.log(err);
+        return err.response.data.message;
+      },
+    });
+  };
   const handleSubmit = async () => {
     if (!formData.email || !formData.password) {
       toast.error("Please fill all the fields");
@@ -78,7 +107,7 @@ const SignUp = () => {
               <div className="flex flex-col md:flex-row gap-2 md:gap-4 justify-center items-center">
                 <button
                   className="btn btn-outline btn-primary btn-block max-w-[200px]"
-                  onClick={handleSubmit}
+                  onClick={handleEmailVerification}
                 >
                   Login
                 </button>
@@ -96,6 +125,43 @@ const SignUp = () => {
           </div>
         </div>
       </div>
+      <dialog id="otpContainer" className="modal">
+        <div className="modal-box space-y-4">
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-base-content">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-lg text-center text-base-content uppercase my-4">
+            Please Enter The OTP
+          </h3>
+          <input
+            type="text"
+            placeholder="Enter Your OTP"
+            className="input input-bordered input-primary w-full text-base-content placeholder:text-base-content/70"
+            value={formData.otp}
+            onChange={(e) => {
+              setFormData({ ...formData, otp: e.target.value });
+            }}
+          />
+          <button
+            className="btn btn-primary w-full"
+            onClick={(e) => {
+              if (otp === formData.otp) {
+                toast.success("OTP Verified");
+                (
+                  document.getElementById("otpContainer") as HTMLDialogElement
+                ).close();
+                handleSubmit();
+              } else {
+                toast.error("Invalid OTP!!!");
+              }
+            }}
+          >
+            Verify
+          </button>
+        </div>
+      </dialog>
     </div>
   );
 };

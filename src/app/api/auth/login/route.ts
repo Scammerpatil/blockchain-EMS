@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
   }
 
   if (
-    formData.email === process.env.ADMIN_EMAIL &&
+    formData.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL &&
     formData.password === process.env.ADMIN_PASSWORD
   ) {
     const data = {

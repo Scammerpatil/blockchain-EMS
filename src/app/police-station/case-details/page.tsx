@@ -76,7 +76,7 @@ const CasePage = () => {
       <h1 className="text-4xl font-bold mb-6 text-center uppercase">
         Case Details For {caseData.title}
       </h1>
-      <div className="max-w-md mx-auto border border-base-content p-6 rounded-2xl space-y-3">
+      <div className="mx-auto border border-base-content p-6 rounded-2xl space-y-3">
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Case ID</legend>
           <input

@@ -16,12 +16,12 @@ const CasePage = () => {
     try {
       const res = await axios.get(`/api/cases/getCase?caseId=${caseId}`);
       setCaseData(res.data.caseData);
-      console.log(res.data.caseData);
       setStatus(res.data.caseData.status);
     } catch (error) {
       console.error("Error fetching case data:", error);
     }
   };
+
   useEffect(() => {
     fetchCaseData();
   }, [caseId]);
@@ -53,101 +53,100 @@ const CasePage = () => {
 
   return (
     <>
-      <h1 className="text-4xl font-bold mb-6 text-center uppercase">
-        Case Details For {caseData.title}
+      <h1 className="text-4xl font-bold text-center mb-6 uppercase">
+        Case Details: {caseData.title}
       </h1>
-      <div className="max-w-md mx-auto border border-base-content p-6 rounded-2xl">
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Case ID</legend>
-          <input
-            type="text"
-            className="input input-ghost cursor-not-allowed w-full"
-            readOnly
-            disabled
-            value={caseData.caseId}
-          />
-        </fieldset>
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Case Name</legend>
-          <input
-            type="text"
-            className="input input-ghost cursor-not-allowed w-full"
-            readOnly
-            disabled
-            value={caseData.title}
-          />
-        </fieldset>
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Description</legend>
-          <textarea
-            className="textarea textarea-ghost cursor-not-allowed w-full"
-            readOnly
-            disabled
-            value={caseData.description}
-          />
-        </fieldset>
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Case Type</legend>
-          <input
-            type="text"
-            className="input input-ghost cursor-not-allowed w-full"
-            readOnly
-            disabled
-            value={caseData.type}
-          />
-        </fieldset>
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Case Priority</legend>
-          <input
-            type="text"
-            className="input input-ghost cursor-not-allowed w-full"
-            readOnly
-            disabled
-            value={caseData.priority}
-          />
-        </fieldset>
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Case Date</legend>
-          <input
-            type="text"
-            className="input input-ghost cursor-not-allowed w-full"
-            readOnly
-            disabled
-            value={new Date(caseData.date).toLocaleDateString()}
-          />
-        </fieldset>
+      <div className="card bg-base-200 shadow-lg border border-base-content/10">
+        <div className="card-body space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <fieldset className="fieldset">
+              <label className="label font-semibold">Case ID</label>
+              <input
+                type="text"
+                className="input input-bordered"
+                value={caseData.caseId}
+                readOnly
+              />
+            </fieldset>
+            <fieldset className="fieldset">
+              <label className="label font-semibold">Date</label>
+              <input
+                type="text"
+                className="input input-bordered"
+                value={new Date(caseData.date).toLocaleDateString()}
+                readOnly
+              />
+            </fieldset>
+            <fieldset className="fieldset">
+              <label className="label font-semibold">Case Type</label>
+              <input
+                type="text"
+                className="input input-bordered"
+                value={caseData.type}
+                readOnly
+              />
+            </fieldset>
+            <fieldset className="fieldset">
+              <label className="label font-semibold">Priority</label>
+              <input
+                type="text"
+                className="input input-bordered"
+                value={caseData.priority}
+                readOnly
+              />
+            </fieldset>
+            <fieldset className="fieldset md:col-span-2">
+              <label className="label font-semibold">Title</label>
+              <input
+                type="text"
+                className="input input-bordered"
+                value={caseData.title}
+                readOnly
+              />
+            </fieldset>
+            <fieldset className="fieldset md:col-span-2">
+              <label className="label font-semibold">Description</label>
+              <textarea
+                className="textarea textarea-bordered"
+                value={caseData.description}
+                readOnly
+              />
+            </fieldset>
+          </div>
 
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Status</legend>
-          <select
-            className="select w-full"
-            value={status}
-            onChange={(e) => handleStatusChange(e.target.value)}
-          >
-            <option value="active">Active</option>
-            <option value="solved">Solved</option>
-            <option value="pending">Pending</option>
-          </select>
-        </fieldset>
-        <legend className="fieldset-legend">Evidences</legend>
-        {caseData.evidence.length > 0 ? (
-          <ul>
-            {caseData.evidence.map((e, index) => (
-              <li key={index} className="mx-auto text-center">
-                {e.description} -{" "}
-                <Link
-                  href={`/${e.path.replace(/^public\\/, "")}`}
-                  target="_blank"
-                >
-                  {" "}
-                  View{" "}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <legend className="fieldset-legend">No Evidence Added</legend>
-        )}
+          <fieldset className="fieldset">
+            <label className="label font-semibold">Status</label>
+            <select
+              className="select select-primary"
+              value={status}
+              onChange={(e) => handleStatusChange(e.target.value)}
+            >
+              <option value="active">Active</option>
+              <option value="solved">Solved</option>
+              <option value="pending">Pending</option>
+            </select>
+          </fieldset>
+
+          <div className="divider">Evidences</div>
+          {caseData.evidence.length > 0 ? (
+            <ul className="list-disc list-inside space-y-2">
+              {caseData.evidence.map((e, index) => (
+                <li key={index}>
+                  <span className="font-medium">{e.description}</span> —{" "}
+                  <Link
+                    href={`/${e.path.replace(/^public\\/, "")}`}
+                    target="_blank"
+                    className="link link-primary"
+                  >
+                    View
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-warning font-medium">No Evidence Added</p>
+          )}
+        </div>
       </div>
     </>
   );

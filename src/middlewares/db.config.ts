@@ -1,4 +1,5 @@
 import Evidence from "@/model/Evidence";
+import PoliceStation from "@/model/PoliceStation";
 import mongoose from "mongoose";
 
 // Database Connection
@@ -11,6 +12,7 @@ const dbConfig = async () => {
       console.log("Connected to the Database");
     });
     Evidence;
+    PoliceStation;
     connection.on("error", (error) => {
       console.log("Error: ", error);
     });

@@ -5,19 +5,19 @@ const About = () => {
     <div className="px-6 py-12 bg-base-100">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-primary">
-          About TributeConnect
+          About Our Evidence Management System
         </h1>
         <p className="text-lg text-base-content/70 mt-3">
-          Honoring legacies, cherishing memories, and supporting causes that
-          matter.
+          Leveraging blockchain to ensure digital evidence integrity, secure
+          storage, and tamper-proof verification.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Image Section */}
         <img
-          src="/tribute.png"
-          alt="About TributeConnect"
+          src="/image.jpg"
+          alt="Evidence Management"
           className="rounded-lg shadow-lg h-96 object-cover mx-auto"
         />
 
@@ -25,27 +25,26 @@ const About = () => {
         <div>
           <h2 className="text-2xl font-semibold text-secondary">Our Mission</h2>
           <p className="text-base-content/70 mt-3">
-            TributeConnect is a platform dedicated to celebrating the lives of
-            loved ones while enabling financial contributions to honor their
-            memory. We provide a meaningful space where families and friends can
-            create heartfelt tributes, share stories, and support causes that
-            their loved ones cared about.
+            Our Blockchain-Powered Evidence Management System is designed to
+            provide a secure, transparent, and immutable environment for
+            handling digital evidence. Whether it's for legal proceedings, law
+            enforcement, or corporate audits, we ensure that every file uploaded
+            is cryptographically sealed and verifiable.
           </p>
 
           <h2 className="text-2xl font-semibold text-secondary mt-6">
-            Why Choose TributeConnect?
+            Why Choose Our Platform?
           </h2>
           <ul className="list-disc list-inside text-base-content/70 mt-3 space-y-2">
+            <li>Immutable blockchain record for every evidence submission.</li>
+            <li>Secure cloud storage with cryptographic hash verification.</li>
             <li>
-              Create personalized tributes with images and heartfelt messages.
+              Supports multimedia files including images, videos, and documents.
             </li>
+            <li>Easy traceability and tamper-proof audit trails.</li>
             <li>
-              Secure and easy-to-use donation system to support meaningful
-              causes.
-            </li>
-            <li>Engage with a supportive community that values remembrance.</li>
-            <li>
-              Preserve legacies through stories, photos, and shared memories.
+              Role-based access control for investigators, admins, and
+              submitters.
             </li>
           </ul>
         </div>

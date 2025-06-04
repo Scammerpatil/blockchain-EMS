@@ -12,7 +12,10 @@ const Component = ({
   return (
     <html lang="en" data-theme="forest">
       <head>
-        <title>Evidence Management System | A Blockchain-Based Digital Evidence Management System</title>
+        <title>
+          Evidence Management System | A Blockchain-Based Digital Evidence
+          Management System
+        </title>
         <meta
           name="description"
           content=" A Blockchain-Based Digital Evidence Management System | Securely upload, store, and verify digital evidence with blockchain integrity, cloud storage, and tamper-proof verification"
