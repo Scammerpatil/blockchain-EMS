@@ -37,14 +37,22 @@ const ManageCasesPage = () => {
   }, []);
 
   const filteredCases = cases.filter((c) => {
+    const searchLower = searchQuery.toLowerCase();
+
+    const matchesSearch =
+      searchQuery === "" ||
+      c.caseId.toLowerCase().includes(searchLower) ||
+      c.title.toLowerCase().includes(searchLower) ||
+      c.description?.toLowerCase().includes(searchLower) ||
+      c.evidence?.some((ev) =>
+        ev.description.toLowerCase().includes(searchLower)
+      );
+
     return (
       (filters.status === "" || c.status === filters.status) &&
       (filters.priority === "" || c.priority === filters.priority) &&
       (filters.type === "" || c.type === filters.type) &&
-      (searchQuery === "" ||
-        c.caseId.includes(searchQuery) ||
-        c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        c.description?.toLowerCase().includes(searchQuery.toLowerCase())) &&
+      matchesSearch &&
       (filters.dateFrom === "" ||
         new Date(c.date) >= new Date(filters.dateFrom)) &&
       (filters.dateTo === "" || new Date(c.date) <= new Date(filters.dateTo))
