@@ -174,7 +174,7 @@ const ManageCasesPage = () => {
           <tbody>
             {filteredCases.length === 0 ? (
               <tr>
-                <td colSpan={8} className="text-center">
+                <td colSpan={9} className="text-center">
                   No cases found
                 </td>
               </tr>

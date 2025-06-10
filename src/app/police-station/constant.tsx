@@ -28,9 +28,4 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     path: "/police-station/verify-evidences",
     icon: <IconAlertCircle width="24" height="24" />,
   },
-  {
-    title: "Profile",
-    path: "/police-station/profile",
-    icon: <IconUser width="24" height="24" />,
-  },
 ];

@@ -36,7 +36,12 @@ export default function Dashboard() {
       </h1>
 
       {loading ? (
-        <p className="text-center text-base-content">Loading dashboard...</p>
+        <div className="flex flex-col items-center justify-center h-64">
+          <span className="loading loading-spinner loading-lg text-primary"></span>
+          <p className="mt-4 text-base-content text-center">
+            Loading dashboard...
+          </p>
+        </div>
       ) : (
         <>
           <div className="stats shadow w-full bg-base-300">
@@ -47,6 +52,19 @@ export default function Dashboard() {
               <div className="stat-title">Total Active Cases</div>
               <div className="stat-value text-primary">
                 {stats?.activeCases || 0}
+              </div>
+              <div className="stat-desc text-base-content/60">
+                {/* Optional percentage comparison */}
+              </div>
+            </div>
+
+            <div className="stat">
+              <div className="stat-figure text-accent">
+                <IconFile size={40} />
+              </div>
+              <div className="stat-title">Total Solved Cases</div>
+              <div className="stat-value text-accent">
+                {stats?.solvedCases || 0}
               </div>
               <div className="stat-desc text-base-content/60">
                 {/* Optional percentage comparison */}

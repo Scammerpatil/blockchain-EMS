@@ -37,8 +37,6 @@ const CasePage = () => {
   }, [caseId]);
 
   const handleSubmit = async () => {
-    console.log("Report data:", report);
-    console.log("Police station:", policeStation);
     if (
       !report.report ||
       !report.address ||
@@ -77,111 +75,92 @@ const CasePage = () => {
         Case Details For {caseData.title}
       </h1>
       <div className="mx-auto border border-base-content p-6 rounded-2xl space-y-3">
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Case ID</legend>
-          <input
-            type="text"
-            className="input input-ghost cursor-not-allowed w-full"
-            readOnly
-            disabled
-            value={caseData.caseId}
-          />
-        </fieldset>
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Police Station Name</legend>
-          <input
-            type="text"
-            className="input input-ghost cursor-not-allowed w-full"
-            readOnly
-            disabled
-            value={caseData.policeStation.stationName}
-          />
-        </fieldset>
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Case Name</legend>
-          <input
-            type="text"
-            className="input input-ghost cursor-not-allowed w-full"
-            readOnly
-            disabled
-            value={caseData.title}
-          />
-        </fieldset>
+        {/* Card layout for case data */}
+        <div className="card bg-base-100 shadow-xl p-4">
+          <div className="card-body">
+            <h2 className="card-title">Case ID</h2>
+            <p>{caseData.caseId}</p>
+          </div>
+        </div>
+        <div className="card bg-base-100 shadow-xl p-4">
+          <div className="card-body">
+            <h2 className="card-title">Police Station Name</h2>
+            <p>{caseData.policeStation.stationName}</p>
+          </div>
+        </div>
+        <div className="card bg-base-100 shadow-xl p-4">
+          <div className="card-body">
+            <h2 className="card-title">Case Name</h2>
+            <p>{caseData.title}</p>
+          </div>
+        </div>
+        <div className="card bg-base-100 shadow-xl p-4">
+          <div className="card-body">
+            <h2 className="card-title">Description</h2>
+            <p>{caseData.description}</p>
+          </div>
+        </div>
+        <div className="card bg-base-100 shadow-xl p-4">
+          <div className="card-body">
+            <h2 className="card-title">Case Type</h2>
+            <p>{caseData.type}</p>
+          </div>
+        </div>
+        <div className="card bg-base-100 shadow-xl p-4">
+          <div className="card-body">
+            <h2 className="card-title">Case Priority</h2>
+            <span
+              className={`badge ${
+                caseData.priority === "high"
+                  ? "badge-error"
+                  : caseData.priority === "medium"
+                  ? "badge-warning"
+                  : "badge-success"
+              }`}
+            >
+              {caseData.priority}
+            </span>
+          </div>
+        </div>
+        <div className="card bg-base-100 shadow-xl p-4">
+          <div className="card-body">
+            <h2 className="card-title">Case Date</h2>
+            <p>{new Date(caseData.date).toLocaleDateString()}</p>
+          </div>
+        </div>
+        <div className="card bg-base-100 shadow-xl p-4">
+          <div className="card-body">
+            <h2 className="card-title">Status</h2>
+            <p>{caseData.status}</p>
+          </div>
+        </div>
 
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Description</legend>
-          <textarea
-            className="textarea textarea-ghost cursor-not-allowed w-full capitalize"
-            readOnly
-            disabled
-            value={caseData.description}
-          />
-        </fieldset>
+        {/* Evidence Section */}
+        <div className="card bg-base-100 shadow-xl p-4">
+          <div className="card-body">
+            <h2 className="card-title">Evidences</h2>
+            {caseData.evidence.length > 0 ? (
+              <ul>
+                {caseData.evidence.map((e, index) => (
+                  <li key={index} className="text-center">
+                    {e.description} -{" "}
+                    <Link
+                      href={`/${e.path.replace(/^public\\/, "")}`}
+                      target="_blank"
+                      className="link link-primary"
+                    >
+                      View
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No evidence added.</p>
+            )}
+          </div>
+        </div>
 
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Case Type</legend>
-          <input
-            type="text"
-            className="input input-ghost cursor-not-allowed w-full capitalize"
-            readOnly
-            disabled
-            value={caseData.type}
-          />
-        </fieldset>
-
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Case Priority</legend>
-          <input
-            type="text"
-            className="input input-ghost cursor-not-allowed w-full capitalize"
-            readOnly
-            disabled
-            value={caseData.priority}
-          />
-        </fieldset>
-
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Case Date</legend>
-          <input
-            type="text"
-            className="input input-ghost cursor-not-allowed w-full capitalize"
-            readOnly
-            disabled
-            value={new Date(caseData.date).toLocaleDateString()}
-          />
-        </fieldset>
-
-        <fieldset className="fieldset">
-          <legend className="fieldset-legend">Status</legend>
-          <input
-            type="text"
-            className="input input-ghost cursor-not-allowed w-full capitalize"
-            readOnly
-            disabled
-            value={status}
-          />
-        </fieldset>
-
-        <legend className="fieldset-legend">Evidences</legend>
-        {caseData.evidence.length > 0 ? (
-          <ul>
-            {caseData.evidence.map((e, index) => (
-              <li key={index} className="mx-auto text-center">
-                {e.description} -{" "}
-                <Link
-                  href={`/${e.path.replace(/^public\\/, "")}`}
-                  target="_blank"
-                >
-                  {" "}
-                  View{" "}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <legend className="fieldset-legend">No Evidence Added</legend>
-        )}
-
+        {/* Button to open the report modal */}
         <button
           className="btn btn-primary btn-circle btn-outline w-full mt-6"
           onClick={() => {
@@ -193,6 +172,8 @@ const CasePage = () => {
           Report
         </button>
       </div>
+
+      {/* Report Modal */}
       <dialog id="report" className="modal">
         <div className="modal-box w-11/12 max-w-5xl">
           <h1 className="text-4xl font-bold mb-6 text-center uppercase">

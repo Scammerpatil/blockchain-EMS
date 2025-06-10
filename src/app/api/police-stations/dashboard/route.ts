@@ -32,6 +32,7 @@ export async function GET(req: NextRequest) {
     const pendingInvestigations = cases.filter(
       (c) => c.status === "pending"
     ).length;
+    const solvedCases = cases.filter((c) => c.status === "solved").length;
 
     const currentYear = new Date().getFullYear();
     const monthlyCases = Array.from({ length: 12 }, (_, i) => {
@@ -49,12 +50,25 @@ export async function GET(req: NextRequest) {
       };
     });
 
+    const totalCases = cases.length;
+
+    const taskCompletion =
+      totalCases > 0
+        ? ((solvedCases / totalCases) * 100).toFixed(2) + "%"
+        : "0%";
+
+    const tasksRemaining =
+      activeCases > 0
+        ? ((pendingInvestigations / activeCases) * 100).toFixed(2)
+        : "0";
+
     const stats = {
+      solvedCases,
       activeCases,
       pendingInvestigations,
-      totalCases: cases.length || 0,
-      taskCompletion: policeStation.taskCompletion || "0%",
-      tasksRemaining: policeStation.tasksRemaining || "No data",
+      totalCases,
+      taskCompletion,
+      tasksRemaining,
       monthlyCases,
     };
 
